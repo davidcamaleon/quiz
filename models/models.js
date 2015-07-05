@@ -42,6 +42,6 @@ sequelize.sync().then(function() {
           {pregunta: 'Capital de Portugal', respuesta: 'Lisboa'}
         ]
       ).then(function(){console.log('Base de datos inicializada')});
-    };
+    };    
   });
 });
