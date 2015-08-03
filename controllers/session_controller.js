@@ -7,7 +7,6 @@ exports.loginRequired = function(req, res, next){
     }
 };
 
-
 // Get /login   -- Formulario de login
 exports.new = function(req, res) {
     var errors = req.session.errors || {};

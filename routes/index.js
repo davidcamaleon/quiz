@@ -9,7 +9,8 @@ router.get('/', function(req, res) {
 });
 
 //Autoload de comandos con quizId
-router.param('quizId', quizController.load); // auoload :quizId
+router.param('quizId', quizController.load); // autoload :quizId
+router.param('commentId', commentController.load) // autoload :commentId
 
 // Definicion de rutas de sesion
 router.get('/login',  sessionController.new);     // formulario de login
@@ -26,8 +27,11 @@ router.get('/quizes/:quizId(\\d+)/edit',   sessionController.loginRequired, quiz
 router.put('/quizes/:quizId(\\d+)',        sessionController.loginRequired, quizController.update);
 router.delete('/quizes/:quizId(\\d+)',     sessionController.loginRequired, quizController.destroy);
 
+// Definicion de las rutas de comentarios
 router.get('/quizes/:quizId(\\d+)/comments/new',            commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments',              commentController.create);
+// El siguiente método debería ser put para cumplir las especificaciones de REST ..
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.publish);
 
 
 module.exports = router;
