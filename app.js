@@ -10,7 +10,6 @@ var methodOverride = require('method-override');
 var session = require('express-session');
 
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -37,6 +36,16 @@ app.use(function(req, res, next) {
    next();
  });
 
+app.use(function(req, res, next) {
+  if (req.session.user) {
+     if (Date.now() - req.session.user.conexionActual > 120000) {
+     delete req.session.user;
+  } else {
+     req.session.user.conexionActual = Date.now();
+     }
+  }
+  next();
+});
 
 app.use('/', routes);
 
