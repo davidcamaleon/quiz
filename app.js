@@ -38,7 +38,7 @@ app.use(function(req, res, next) {
 
 app.use(function(req, res, next) {
   if (req.session.user) {
-     if (Date.now() - req.session.user.conexionActual > 120000) {
+     if (Date.now() - req.session.user.conexionActual > 1200000) {
      delete req.session.user;
   } else {
      req.session.user.conexionActual = Date.now();
